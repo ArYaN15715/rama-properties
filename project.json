@@ -1,0 +1,26 @@
+{
+  "overview": "Premium commercial real estate consulting website for Rama Properties, based in Bhikaji Cama Place, New Delhi. Positions them as a high-end commercial property and investment advisory firm targeting business owners, office seekers, and investors.",
+  "features": [
+    "Cinematic hero with animated overlay and trust strip",
+    "Interactive property category cards with hover effects",
+    "Featured properties premium grid with overlay CTAs",
+    "Authority section with animated transitions",
+    "4-step consultation process timeline",
+    "Glassmorphism testimonials auto-scroll slider",
+    "Market insights with Recharts data visualizations",
+    "Consultation inquiry form with backend storage",
+    "Floating WhatsApp, Call, and Consultation action buttons",
+    "Sticky navbar with logo and premium blur effect",
+    "Mobile-first responsive design with Motion.js animations"
+  ],
+  "category": "real-estate",
+  "tags": [
+    "real-estate",
+    "commercial-property",
+    "consulting",
+    "delhi",
+    "landing-page",
+    "lead-generation"
+  ],
+  "last_updated": "2026-05-11T10:54:31.531Z"
+}

@@ -1,0 +1,35 @@
+type SubmissionResult = 
+ record {
+   id: nat;
+   message: text;
+ };
+type PropertyType = 
+ variant {
+   commercial;
+   investment;
+   office;
+   other;
+   retail;
+ };
+type ConsultationRequest = 
+ record {
+   email: text;
+   message: text;
+   name: text;
+   phone: text;
+   propertyType: PropertyType;
+ };
+type Consultation = 
+ record {
+   email: text;
+   id: nat;
+   message: text;
+   name: text;
+   phone: text;
+   propertyType: PropertyType;
+   timestamp: int;
+ };
+service : {
+  listConsultations: () -> (vec Consultation) query;
+  submitConsultation: (req: ConsultationRequest) -> (SubmissionResult);
+}

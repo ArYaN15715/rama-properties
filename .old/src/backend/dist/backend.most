@@ -1,0 +1,24 @@
+// Version: 1.0.0
+type Consultation__206893073 =
+  {
+    email : Text;
+    id : Nat;
+    message : Text;
+    name : Text;
+    phone : Text;
+    propertyType : PropertyType__784461543;
+    timestamp : Int
+  };
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type PropertyType__784461543 =
+  {#commercial; #investment; #office; #other; #retail};
+actor {
+  stable consultations :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Consultation__206893073]];
+      var elementIndex : Nat__490723111
+    };
+  stable state : {var nextId : Nat}
+};
