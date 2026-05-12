@@ -39365,6 +39365,25 @@ function CTASection({ onConsultationOpen }) {
           }
         ),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
+          motion.div,
+          {
+            animate: {
+              x: [-20, 20, -20],
+              y: [-10, 10, -10],
+              opacity: [0.06, 0.12, 0.06]
+            },
+            transition: {
+              duration: 12,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut"
+            },
+            className: "absolute top-1/3 right-1/4 w-[300px] h-[300px] rounded-full pointer-events-none",
+            style: {
+              background: "radial-gradient(circle, rgba(26,58,107,0.3) 0%, transparent 70%)"
+            }
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
             className: "absolute inset-0 pointer-events-none opacity-5",
@@ -39382,15 +39401,25 @@ function CTASection({ onConsultationOpen }) {
             viewport: { once: true },
             transition: { duration: 0.8 },
             children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-accent text-xs tracking-widest uppercase font-semibold mb-5", children: "Get Started Today" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-display-md text-white mb-5 leading-tight", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                motion.p,
+                {
+                  initial: { opacity: 0, letterSpacing: "0.2em" },
+                  whileInView: { opacity: 1, letterSpacing: "0.3em" },
+                  viewport: { once: true },
+                  transition: { duration: 0.6 },
+                  className: "text-accent text-xs tracking-widest uppercase font-semibold mb-5",
+                  children: "Get Started Today"
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-display-md text-white mb-5 leading-tight text-shimmer", children: [
                 "Looking for the Right",
                 /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
                 "Commercial Property?"
               ] }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-white/55 text-base mb-12 max-w-xl mx-auto leading-relaxed", children: "Get expert consulting tailored to your business goals. No obligation, just honest advice from Delhi NCR's most trusted commercial advisors." }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col sm:flex-row items-center justify-center gap-4", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { whileHover: { scale: 1.05 }, whileTap: { scale: 0.97 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                   Button,
                   {
                     type: "button",
@@ -39400,12 +39429,14 @@ function CTASection({ onConsultationOpen }) {
                     className: "bg-accent hover:bg-accent/85 text-white font-semibold tracking-wide px-10 h-13 shadow-elevated transition-smooth text-sm",
                     children: "Book Consultation"
                   }
-                ),
+                ) }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                  "a",
+                  motion.a,
                   {
                     href: "tel:+919999999999",
                     "data-ocid": "cta.call_button",
+                    whileHover: { scale: 1.05 },
+                    whileTap: { scale: 0.97 },
                     className: "inline-flex items-center gap-2.5 border border-white/25 text-white hover:bg-white/8 hover:border-white/50 h-13 px-8 text-sm font-semibold tracking-wide rounded-md transition-smooth",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsx(Phone, { size: 15 }),
@@ -39426,7 +39457,18 @@ function CTASection({ onConsultationOpen }) {
                     "🏢 Commercial Property Experts",
                     "📍 Bhikaji Cama Specialists",
                     "💼 Investment Advisory"
-                  ].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-white/40 text-xs tracking-wide", children: item }, item))
+                  ].map((item, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    motion.span,
+                    {
+                      initial: { opacity: 0, y: 8 },
+                      whileInView: { opacity: 1, y: 0 },
+                      viewport: { once: true },
+                      transition: { delay: 0.5 + i * 0.12, duration: 0.4 },
+                      className: "text-white/40 text-xs tracking-wide hover:text-white/60 transition-colors duration-200",
+                      children: item
+                    },
+                    item
+                  ))
                 }
               )
             ]
@@ -47177,7 +47219,7 @@ function ConsultationModal({ open, onClose }) {
                       "data-ocid": "consultation.name_input",
                       placeholder: "Rajesh Kumar",
                       ...register("name", { required: "Name is required" }),
-                      className: errors.name ? "border-accent" : ""
+                      className: `input-focus-glow transition-all duration-200 ${errors.name ? "border-accent" : ""}`
                     }
                   ),
                   errors.name && /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -47208,7 +47250,7 @@ function ConsultationModal({ open, onClose }) {
                           message: "Enter a valid phone number"
                         }
                       }),
-                      className: errors.phone ? "border-accent" : ""
+                      className: `input-focus-glow transition-all duration-200 ${errors.phone ? "border-accent" : ""}`
                     }
                   ),
                   errors.phone && /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -47240,7 +47282,7 @@ function ConsultationModal({ open, onClose }) {
                         message: "Enter a valid email"
                       }
                     }),
-                    className: errors.email ? "border-accent" : ""
+                    className: `input-focus-glow transition-all duration-200 ${errors.email ? "border-accent" : ""}`
                   }
                 ),
                 errors.email && /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -47385,7 +47427,17 @@ function ConsultationProcess() {
             transition: { duration: 0.7 },
             className: "text-center mb-20",
             children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-accent text-xs tracking-widest uppercase font-semibold mb-3", children: "How We Work" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                motion.p,
+                {
+                  initial: { opacity: 0, letterSpacing: "0.2em" },
+                  whileInView: { opacity: 1, letterSpacing: "0.3em" },
+                  viewport: { once: true },
+                  transition: { duration: 0.6 },
+                  className: "text-accent text-xs tracking-widest uppercase font-semibold mb-3",
+                  children: "How We Work"
+                }
+              ),
               /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-display-md text-foreground mb-4", children: "Smart Consultation Process" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground max-w-xl mx-auto text-base leading-relaxed", children: "A structured, transparent process designed to get you into the right space as quickly as possible." })
             ]
@@ -47431,13 +47483,26 @@ function ConsultationProcess() {
             motion.div,
             {
               "data-ocid": `services.step.${i + 1}`,
-              initial: { opacity: 0, x: -20 },
+              initial: { opacity: 0, x: -24 },
               whileInView: { opacity: 1, x: 0 },
-              viewport: { once: true },
-              transition: { duration: 0.55, delay: i * 0.1 },
+              viewport: { once: true, margin: "-40px" },
+              transition: {
+                duration: 0.55,
+                delay: i * 0.12,
+                ease: [0.34, 1.1, 0.64, 1]
+              },
               className: "flex gap-5 relative pb-10 last:pb-0",
               children: [
-                i < STEPS.length - 1 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute left-5 top-12 bottom-0 w-px bg-gradient-to-b from-accent/40 to-border" }),
+                i < STEPS.length - 1 && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  motion.div,
+                  {
+                    initial: { scaleY: 0 },
+                    whileInView: { scaleY: 1 },
+                    viewport: { once: true },
+                    transition: { duration: 0.5, delay: i * 0.12 + 0.3 },
+                    className: "absolute left-5 top-12 bottom-0 w-px bg-gradient-to-b from-accent/40 to-border origin-top"
+                  }
+                ),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-shrink-0 w-11 h-11 rounded-full border-2 border-primary/30 bg-card shadow-subtle flex items-center justify-center z-10", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display font-bold text-xs text-primary", children: step.number }) }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "pt-1", children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-2", children: [
@@ -47461,16 +47526,35 @@ function StepCard({ step, index: index2 }) {
     motion.div,
     {
       "data-ocid": `services.step.${index2 + 1}`,
-      initial: { opacity: 0, y: 28 },
+      initial: { opacity: 0, y: 32 },
       whileInView: { opacity: 1, y: 0 },
-      viewport: { once: true },
-      transition: { duration: 0.55, delay: index2 * 0.12 },
-      whileHover: { y: -4 },
+      viewport: { once: true, margin: "-60px" },
+      transition: {
+        duration: 0.55,
+        delay: index2 * 0.14,
+        ease: [0.34, 1.1, 0.64, 1]
+      },
+      whileHover: { y: -6 },
       className: "group flex flex-col items-center text-center cursor-default",
       children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative z-10 w-20 h-20 rounded-full border-2 border-border bg-card shadow-subtle flex items-center justify-center mb-6 group-hover:border-accent/40 group-hover:shadow-elevated transition-smooth", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display font-bold text-2xl text-primary group-hover:text-accent transition-smooth", children: step.number }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          motion.div,
+          {
+            className: "relative z-10 w-20 h-20 rounded-full border-2 border-border bg-card shadow-subtle flex items-center justify-center mb-6 group-hover:border-accent/40 group-hover:shadow-elevated transition-all duration-300",
+            whileHover: { scale: 1.08 },
+            transition: { duration: 0.22 },
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display font-bold text-2xl text-primary group-hover:text-accent transition-colors duration-300", children: step.number })
+          }
+        ),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-3", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { size: 16, className: "text-accent flex-shrink-0" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            motion.div,
+            {
+              whileHover: { rotate: [0, -10, 10, 0] },
+              transition: { duration: 0.35 },
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { size: 16, className: "text-accent flex-shrink-0" })
+            }
+          ),
           /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-semibold text-base text-foreground", children: step.title })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-sm leading-relaxed", children: step.description })
@@ -47575,11 +47659,21 @@ function FeaturedProperties() {
         {
           initial: { opacity: 0, y: 28 },
           whileInView: { opacity: 1, y: 0 },
-          viewport: { once: true },
+          viewport: { once: true, margin: "-80px" },
           transition: { duration: 0.7 },
           className: "text-center mb-16",
           children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-accent text-xs tracking-widest uppercase font-semibold mb-3", children: "Available Now" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              motion.p,
+              {
+                initial: { opacity: 0, letterSpacing: "0.2em" },
+                whileInView: { opacity: 1, letterSpacing: "0.3em" },
+                viewport: { once: true },
+                transition: { duration: 0.6 },
+                className: "text-accent text-xs tracking-widest uppercase font-semibold mb-3",
+                children: "Available Now"
+              }
+            ),
             /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-display-md text-foreground mb-4", children: "Featured Office Spaces" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground max-w-xl mx-auto text-base leading-relaxed", children: "Hand-selected commercial properties in Delhi NCR's most prestigious business locations." })
           ]
@@ -47602,7 +47696,7 @@ function FeaturedProperties() {
           viewport: { once: true },
           transition: { duration: 0.6, delay: 0.4 },
           className: "text-center mt-14",
-          children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { whileHover: { scale: 1.04 }, whileTap: { scale: 0.97 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             Button,
             {
               type: "button",
@@ -47612,7 +47706,7 @@ function FeaturedProperties() {
               className: "border-primary/30 text-primary hover:bg-primary/5 hover:border-primary/60 px-10 h-12 font-semibold tracking-wide transition-smooth",
               children: "Request Full Portfolio"
             }
-          )
+          ) })
         }
       )
     ] }),
@@ -47634,11 +47728,16 @@ function PropertyCard({
     motion.div,
     {
       "data-ocid": `featured.item.${index2 + 1}`,
-      initial: { opacity: 0, y: 28 },
+      initial: { opacity: 0, y: 32 },
       whileInView: { opacity: 1, y: 0 },
-      viewport: { once: true },
-      transition: { duration: 0.55, delay: index2 * 0.08 },
-      className: "group relative rounded-xl overflow-hidden shadow-subtle hover:shadow-elevated transition-smooth border border-border bg-card cursor-pointer",
+      viewport: { once: true, margin: "-60px" },
+      transition: {
+        duration: 0.55,
+        delay: index2 * 0.08,
+        ease: [0.34, 1.1, 0.64, 1]
+      },
+      whileHover: { y: -6 },
+      className: "group relative rounded-xl overflow-hidden shadow-subtle hover:shadow-elevated transition-all duration-300 border border-border hover:border-primary/20 bg-card cursor-pointer",
       onClick: onEnquire,
       children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative h-56 overflow-hidden", children: [
@@ -47653,9 +47752,9 @@ function PropertyCard({
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-[#0d1f3c]/0 group-hover:bg-[#0d1f3c]/75 transition-all duration-300 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             motion.div,
             {
-              initial: { opacity: 0, scale: 0.92 },
-              whileHover: { opacity: 1, scale: 1 },
-              className: "opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+              initial: { opacity: 0, scale: 0.88, y: 8 },
+              whileHover: { opacity: 1, scale: 1, y: 0 },
+              className: "opacity-0 group-hover:opacity-100 transition-all duration-300",
               children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 Button,
                 {
@@ -47671,7 +47770,17 @@ function PropertyCard({
               )
             }
           ) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-4 left-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "bg-[#0d1f3c]/80 backdrop-blur-sm text-white border-0 text-[10px] font-semibold tracking-wide", children: property2.type }) })
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            motion.div,
+            {
+              className: "absolute top-4 left-4",
+              initial: { opacity: 0, scale: 0.85 },
+              whileInView: { opacity: 1, scale: 1 },
+              viewport: { once: true },
+              transition: { delay: index2 * 0.08 + 0.3, duration: 0.3 },
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "bg-[#0d1f3c]/80 backdrop-blur-sm text-white border-0 text-[10px] font-semibold tracking-wide", children: property2.type })
+            }
+          )
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-5", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-semibold text-base text-foreground mb-2 line-clamp-1", children: property2.name }),
@@ -47777,15 +47886,18 @@ function FloatingActions({ onConsultationOpen }) {
             "data-ocid": "floating.toggle_button",
             onClick: () => setExpanded(!expanded),
             className: "w-13 h-13 rounded-full bg-[#0d1f3c] hover:bg-[#152d54] text-white flex items-center justify-center shadow-elevated border border-white/10 transition-smooth",
-            whileHover: { scale: 1.08 },
-            whileTap: { scale: 0.95 },
+            whileHover: {
+              scale: 1.1,
+              boxShadow: "0 0 0 4px rgba(204,0,0,0.18), 0 8px 24px rgba(0,0,0,0.3)"
+            },
+            whileTap: { scale: 0.93 },
             "aria-label": "Contact options",
             style: { width: 52, height: 52 },
             children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               motion.div,
               {
                 animate: { rotate: expanded ? 45 : 0 },
-                transition: { duration: 0.25 },
+                transition: { duration: 0.28, ease: [0.34, 1.56, 0.64, 1] },
                 children: expanded ? /* @__PURE__ */ jsxRuntimeExports.jsx(X, { size: 20 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 20 })
               }
             )
@@ -47831,21 +47943,25 @@ function Footer() {
           transition: { duration: 0.6 },
           children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "img",
+              motion.img,
               {
                 src: "/assets/logo-019e16aa-2718-718b-a354-8b642ee0ec24.png",
                 alt: "Rama Properties",
-                className: "h-11 w-auto mb-5"
+                className: "h-11 w-auto mb-5",
+                whileHover: { scale: 1.04 },
+                transition: { duration: 0.2 }
               }
             ),
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-white/45 text-sm leading-relaxed mb-6 max-w-xs", children: "Premium office space and commercial property advisory in Delhi NCR. Bhikaji Cama Place's most trusted consultants." }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-3", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "a",
+                motion.a,
                 {
                   href: "https://maps.google.com/?q=Bhikaji+Cama+Place+New+Delhi",
                   target: "_blank",
                   rel: "noopener noreferrer",
+                  whileHover: { x: 3 },
+                  transition: { duration: 0.18 },
                   className: "flex items-start gap-2.5 text-white/40 hover:text-white/70 transition-colors text-xs",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -47860,9 +47976,11 @@ function Footer() {
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "a",
+                motion.a,
                 {
                   href: "tel:+919999999999",
+                  whileHover: { x: 3 },
+                  transition: { duration: 0.18 },
                   className: "flex items-center gap-2.5 text-white/40 hover:text-white/70 transition-colors text-xs",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsx(Phone, { size: 13, className: "flex-shrink-0 text-accent/70" }),
@@ -47871,11 +47989,13 @@ function Footer() {
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "a",
+                motion.a,
                 {
                   href: "https://wa.me/919999999999",
                   target: "_blank",
                   rel: "noopener noreferrer",
+                  whileHover: { x: 3 },
+                  transition: { duration: 0.18 },
                   className: "flex items-center gap-2.5 text-white/40 hover:text-accent/80 transition-colors text-xs",
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -47902,12 +48022,15 @@ function Footer() {
           transition: { duration: 0.5, delay: (i + 1) * 0.08 },
           children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "text-white font-semibold text-xs tracking-widest uppercase mb-5", children: category }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "flex flex-col gap-2.5", children: links.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "flex flex-col gap-2.5", children: links.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
               "a",
               {
                 href: link.href,
-                className: "text-white/40 hover:text-white/75 transition-colors text-sm",
-                children: link.label
+                className: "text-white/40 hover:text-white/75 transition-colors duration-200 text-sm group relative inline-block",
+                children: [
+                  link.label,
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute -bottom-px left-0 h-px w-0 bg-white/40 group-hover:w-full transition-all duration-300" })
+                ]
               }
             ) }, link.label)) })
           ]
@@ -47992,12 +48115,23 @@ function Hero({ onConsultationOpen }) {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 motion.div,
                 {
-                  initial: { opacity: 0, y: 20 },
-                  animate: { opacity: 1, y: 0 },
-                  transition: { duration: 0.7, delay: 0.2 },
-                  className: "inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-white/15 glass-effect-dark text-white/70 text-sm tracking-widest uppercase",
+                  initial: { opacity: 0, y: 20, scale: 0.95 },
+                  animate: { opacity: 1, y: 0, scale: 1 },
+                  transition: { duration: 0.7, delay: 0.2, ease: "easeOut" },
+                  className: "inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-white/15 glass-effect-dark text-white/70 text-sm tracking-widest uppercase animate-bob",
                   children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-1.5 h-1.5 rounded-full bg-accent" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      motion.span,
+                      {
+                        animate: { scale: [1, 1.4, 1], opacity: [0.8, 1, 0.8] },
+                        transition: {
+                          duration: 2.5,
+                          repeat: Number.POSITIVE_INFINITY,
+                          ease: "easeInOut"
+                        },
+                        className: "w-1.5 h-1.5 rounded-full bg-accent"
+                      }
+                    ),
                     "Bhikaji Cama Place, New Delhi"
                   ]
                 }
@@ -48047,7 +48181,7 @@ function Hero({ onConsultationOpen }) {
                   transition: { duration: 0.7, delay: 0.7 },
                   className: "flex flex-col sm:flex-row items-center justify-center gap-4 mb-14",
                   children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { whileHover: { scale: 1.04 }, whileTap: { scale: 0.97 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                       Button,
                       {
                         type: "button",
@@ -48056,8 +48190,8 @@ function Hero({ onConsultationOpen }) {
                         className: "bg-accent hover:bg-accent/90 text-white h-12 px-8 text-sm font-semibold tracking-wide rounded shadow-elevated transition-smooth group",
                         children: "Schedule Consultation"
                       }
-                    ),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    ) }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { whileHover: { scale: 1.04 }, whileTap: { scale: 0.97 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                       Button,
                       {
                         type: "button",
@@ -48067,7 +48201,7 @@ function Hero({ onConsultationOpen }) {
                         className: "border-white/30 text-white hover:bg-white/10 hover:border-white/60 h-12 px-8 text-sm font-semibold tracking-wide rounded bg-transparent transition-smooth",
                         children: "Explore Properties"
                       }
-                    )
+                    ) })
                   ]
                 }
               ),
@@ -48083,10 +48217,18 @@ function Hero({ onConsultationOpen }) {
                     {
                       initial: { opacity: 0, y: 10 },
                       animate: { opacity: 1, y: 0 },
-                      transition: { duration: 0.5, delay: 0.9 + i * 0.12 },
-                      className: "flex items-center gap-2.5 text-white/60",
+                      transition: { duration: 0.5, delay: 0.9 + i * 0.14 },
+                      whileHover: { scale: 1.05 },
+                      className: "flex items-center gap-2.5 text-white/60 cursor-default",
                       children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(item.icon, { size: 16, className: "text-accent/80" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          motion.div,
+                          {
+                            whileHover: { rotate: [0, -8, 8, 0] },
+                            transition: { duration: 0.4 },
+                            children: /* @__PURE__ */ jsxRuntimeExports.jsx(item.icon, { size: 16, className: "text-accent/80" })
+                          }
+                        ),
                         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm tracking-wide", children: item.label }),
                         i < TRUST_ITEMS.length - 1 && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "hidden sm:block w-px h-4 bg-white/20 ml-4" })
                       ]
@@ -48107,6 +48249,7 @@ function Hero({ onConsultationOpen }) {
             animate: { opacity: 1 },
             transition: { delay: 1.4, duration: 0.6 },
             onClick: scrollToProperties,
+            whileHover: { scale: 1.1 },
             className: "absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-white/40 hover:text-white/70 transition-colors cursor-pointer",
             "aria-label": "Scroll down",
             children: [
@@ -72126,17 +72269,35 @@ function InsightCard({
     motion.div,
     {
       "data-ocid": `insights.card.${index2 + 1}`,
-      initial: { opacity: 0, y: 28 },
+      initial: { opacity: 0, y: 32 },
       whileInView: { opacity: 1, y: 0 },
-      viewport: { once: true },
-      transition: { duration: 0.6, delay: index2 * 0.1 },
-      whileHover: { y: -4 },
-      className: "glass-effect-dark rounded-xl p-7 transition-smooth hover:border-white/15 border border-white/5",
+      viewport: { once: true, margin: "-60px" },
+      transition: {
+        duration: 0.6,
+        delay: index2 * 0.1,
+        ease: [0.34, 1.1, 0.64, 1]
+      },
+      whileHover: { y: -5 },
+      className: "glass-effect-dark rounded-xl p-7 transition-all duration-300 border border-white/5 hover:border-accent/20",
+      style: {
+        boxShadow: void 0
+      },
+      whileFocus: { boxShadow: "0 0 0 2px rgba(204,0,0,0.35)" },
       children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-5", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-semibold text-base text-white mb-1", children: title }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-white/40 text-xs", children: subtitle })
-        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          motion.div,
+          {
+            className: "mb-5",
+            initial: { opacity: 0, x: -8 },
+            whileInView: { opacity: 1, x: 0 },
+            viewport: { once: true },
+            transition: { delay: index2 * 0.1 + 0.15, duration: 0.4 },
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-semibold text-base text-white mb-1", children: title }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-white/40 text-xs", children: subtitle })
+            ]
+          }
+        ),
         children
       ]
     }
@@ -72151,6 +72312,7 @@ const NAV_LINKS = [
 function Navbar({ onConsultationOpen }) {
   const [scrolled, setScrolled] = reactExports.useState(false);
   const [mobileOpen, setMobileOpen] = reactExports.useState(false);
+  const [activeLink, setActiveLink] = reactExports.useState("");
   reactExports.useEffect(() => {
     const handleScroll2 = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll2, { passive: true });
@@ -72158,6 +72320,7 @@ function Navbar({ onConsultationOpen }) {
   }, []);
   const scrollTo = (href) => {
     setMobileOpen(false);
+    setActiveLink(href);
     const el = document.querySelector(href);
     el == null ? void 0 : el.scrollIntoView({ behavior: "smooth" });
   };
@@ -72165,19 +72328,22 @@ function Navbar({ onConsultationOpen }) {
     motion.header,
     {
       "data-ocid": "navbar",
-      initial: { y: -20, opacity: 0 },
+      initial: { y: -24, opacity: 0 },
       animate: { y: 0, opacity: 1 },
       transition: { duration: 0.6, ease: "easeOut" },
-      className: `fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-[#0d1f3c]/95 backdrop-blur-xl shadow-elevated border-b border-white/5" : "bg-transparent backdrop-blur-sm"}`,
+      className: `fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-[#0d1f3c]/96 backdrop-blur-xl shadow-elevated border-b border-white/5" : "bg-transparent backdrop-blur-sm"}`,
       children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "container mx-auto flex items-center justify-between h-18 py-3 px-6 max-w-7xl", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
+            motion.button,
             {
               type: "button",
               "data-ocid": "navbar.logo_link",
               onClick: () => window.scrollTo({ top: 0, behavior: "smooth" }),
               className: "flex-shrink-0",
+              whileHover: { scale: 1.03 },
+              whileTap: { scale: 0.97 },
+              transition: { duration: 0.18 },
               children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "img",
                 {
@@ -72197,17 +72363,23 @@ function Navbar({ onConsultationOpen }) {
               className: "text-white/80 hover:text-white text-sm font-medium tracking-wide transition-colors duration-200 relative group",
               children: [
                 link.label,
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute -bottom-0.5 left-0 w-0 h-px bg-accent group-hover:w-full transition-all duration-300" })
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "span",
+                  {
+                    className: `absolute -bottom-0.5 left-0 h-px bg-accent transition-all duration-300 ${activeLink === link.href ? "w-full" : "w-0 group-hover:w-full"}`
+                  }
+                )
               ]
             },
             link.href
           )) }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "hidden md:flex items-center gap-3", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              "a",
+              motion.a,
               {
                 href: "tel:+919999999999",
                 "data-ocid": "navbar.call_button",
+                whileHover: { scale: 1.05 },
                 className: "flex items-center gap-1.5 text-white/70 hover:text-white text-sm transition-colors duration-200",
                 children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(Phone, { size: 15 }),
@@ -72216,12 +72388,13 @@ function Navbar({ onConsultationOpen }) {
               }
             ),
             /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              "a",
+              motion.a,
               {
                 href: "https://wa.me/919999999999",
                 target: "_blank",
                 rel: "noopener noreferrer",
                 "data-ocid": "navbar.whatsapp_button",
+                whileHover: { scale: 1.05 },
                 className: "flex items-center gap-1.5 text-white/70 hover:text-white text-sm transition-colors duration-200",
                 children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(MessageCircle, { size: 15 }),
@@ -72229,26 +72402,34 @@ function Navbar({ onConsultationOpen }) {
                 ]
               }
             ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
+            /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { whileHover: { scale: 1.03 }, whileTap: { scale: 0.97 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               Button,
               {
                 type: "button",
                 "data-ocid": "navbar.consultation_button",
                 onClick: onConsultationOpen,
-                className: "bg-accent hover:bg-accent/90 text-white text-sm px-5 h-9 rounded font-semibold tracking-wide transition-smooth",
+                className: "bg-accent hover:bg-accent/90 text-white text-sm px-5 h-9 rounded font-semibold tracking-wide transition-smooth btn-press",
                 children: "Schedule Consultation"
               }
-            )
+            ) })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
+            motion.button,
             {
               type: "button",
               "data-ocid": "navbar.mobile_menu_button",
               className: "md:hidden text-white p-2 -mr-2",
               onClick: () => setMobileOpen(!mobileOpen),
               "aria-label": "Toggle menu",
-              children: mobileOpen ? /* @__PURE__ */ jsxRuntimeExports.jsx(X, { size: 22 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Menu, { size: 22 })
+              whileTap: { scale: 0.92 },
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                motion.div,
+                {
+                  animate: { rotate: mobileOpen ? 90 : 0 },
+                  transition: { duration: 0.22 },
+                  children: mobileOpen ? /* @__PURE__ */ jsxRuntimeExports.jsx(X, { size: 22 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Menu, { size: 22 })
+                }
+              )
             }
           )
         ] }),
@@ -72258,15 +72439,18 @@ function Navbar({ onConsultationOpen }) {
             initial: { opacity: 0, height: 0 },
             animate: { opacity: 1, height: "auto" },
             exit: { opacity: 0, height: 0 },
-            transition: { duration: 0.3 },
+            transition: { duration: 0.3, ease: "easeInOut" },
             className: "md:hidden bg-[#0d1f3c]/97 backdrop-blur-xl border-t border-white/5 overflow-hidden",
             children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "container px-6 py-5 flex flex-col gap-4", children: [
-              NAV_LINKS.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "button",
+              NAV_LINKS.map((link, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                motion.button,
                 {
                   type: "button",
                   "data-ocid": `navbar.mobile_${link.label.toLowerCase()}_link`,
                   onClick: () => scrollTo(link.href),
+                  initial: { opacity: 0, x: -12 },
+                  animate: { opacity: 1, x: 0 },
+                  transition: { delay: i * 0.06, duration: 0.22 },
                   className: "text-white/80 hover:text-white text-base font-medium text-left transition-colors",
                   children: link.label
                 },
@@ -72367,11 +72551,21 @@ function PropertyCategories({
           {
             initial: { opacity: 0, y: 28 },
             whileInView: { opacity: 1, y: 0 },
-            viewport: { once: true },
+            viewport: { once: true, margin: "-80px" },
             transition: { duration: 0.7 },
             className: "text-center mb-16",
             children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-accent text-xs tracking-widest uppercase font-semibold mb-3", children: "What We Offer" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                motion.p,
+                {
+                  initial: { opacity: 0, letterSpacing: "0.2em" },
+                  whileInView: { opacity: 1, letterSpacing: "0.3em" },
+                  viewport: { once: true },
+                  transition: { duration: 0.6 },
+                  className: "text-accent text-xs tracking-widest uppercase font-semibold mb-3",
+                  children: "What We Offer"
+                }
+              ),
               /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-display-md text-foreground mb-4", children: "Commercial Property Experience" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground max-w-xl mx-auto text-base leading-relaxed", children: "Specialist advisory across every commercial property category in Delhi NCR." })
             ]
@@ -72400,11 +72594,16 @@ function CategoryCard({
     motion.div,
     {
       "data-ocid": `properties.item.${index2 + 1}`,
-      initial: { opacity: 0, y: 28 },
+      initial: { opacity: 0, y: 32 },
       whileInView: { opacity: 1, y: 0 },
-      viewport: { once: true },
-      transition: { duration: 0.55, delay: index2 * 0.1 },
-      whileHover: { y: -6, scale: 1.01 },
+      viewport: { once: true, margin: "-60px" },
+      transition: {
+        duration: 0.55,
+        delay: index2 * 0.1,
+        ease: [0.34, 1.1, 0.64, 1]
+      },
+      whileHover: { y: -8, scale: 1.02 },
+      whileTap: { scale: 0.98 },
       onClick: onConsultationOpen,
       className: "group relative overflow-hidden rounded-xl cursor-pointer shadow-subtle hover:shadow-elevated transition-smooth border border-border",
       style: { minHeight: 320 },
@@ -72415,22 +72614,22 @@ function CategoryCard({
             {
               src: cat.imageUrl,
               alt: cat.title,
-              className: "w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+              className: "w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-112"
             }
           ),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "div",
             {
-              className: `absolute inset-0 bg-gradient-to-t ${cat.color} group-hover:opacity-90 transition-opacity duration-300`
+              className: `absolute inset-0 bg-gradient-to-t ${cat.color} group-hover:opacity-95 transition-opacity duration-300`
             }
           )
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
-            className: "absolute inset-0 z-10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none",
+            className: "absolute inset-0 z-10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none",
             style: {
-              boxShadow: "inset 0 0 0 1.5px rgba(204,0,0,0.5), 0 0 24px 0 rgba(204,0,0,0.15)"
+              boxShadow: "inset 0 0 0 1.5px rgba(204,0,0,0.55), 0 0 30px 0 rgba(204,0,0,0.18)"
             }
           }
         ),
@@ -72441,14 +72640,32 @@ function CategoryCard({
             style: { minHeight: 320 },
             children: [
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                cat.tag && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-block bg-accent/90 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full tracking-wider mb-4", children: cat.tag }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-11 h-11 rounded-lg bg-white/10 backdrop-blur-sm flex items-center justify-center mb-5 group-hover:bg-white/20 transition-smooth", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { size: 20, className: "text-white" }) }),
+                cat.tag && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  motion.span,
+                  {
+                    initial: { opacity: 0, x: -8 },
+                    whileInView: { opacity: 1, x: 0 },
+                    viewport: { once: true },
+                    transition: { delay: index2 * 0.1 + 0.2 },
+                    className: "inline-block bg-accent/90 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full tracking-wider mb-4",
+                    children: cat.tag
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  motion.div,
+                  {
+                    className: "w-11 h-11 rounded-lg bg-white/10 backdrop-blur-sm flex items-center justify-center mb-5 group-hover:bg-white/20 transition-smooth",
+                    whileHover: { rotate: [0, -5, 5, 0] },
+                    transition: { duration: 0.35 },
+                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { size: 20, className: "text-white" })
+                  }
+                ),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-bold text-lg text-white mb-2", children: cat.title }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-white/70 text-sm leading-relaxed", children: cat.description })
               ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 flex items-center gap-2 text-white text-xs font-semibold tracking-wide group-hover:gap-3 transition-smooth", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 flex items-center gap-2 text-white text-xs font-semibold tracking-wide group-hover:gap-3.5 transition-all duration-300", children: [
                 "Enquire Now",
-                /* @__PURE__ */ jsxRuntimeExports.jsx(motion.span, { animate: { x: 0 }, whileHover: { x: 4 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { size: 14 }) })
+                /* @__PURE__ */ jsxRuntimeExports.jsx(motion.span, { className: "group-hover:translate-x-1 transition-transform duration-200", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { size: 14 }) })
               ] })
             ]
           }
@@ -72509,7 +72726,17 @@ function Testimonials() {
         transition: { duration: 0.7 },
         className: "text-center mb-16",
         children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-accent text-xs tracking-widest uppercase font-semibold mb-3", children: "Client Testimonials" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            motion.p,
+            {
+              initial: { opacity: 0, letterSpacing: "0.2em" },
+              whileInView: { opacity: 1, letterSpacing: "0.3em" },
+              viewport: { once: true },
+              transition: { duration: 0.6 },
+              className: "text-accent text-xs tracking-widest uppercase font-semibold mb-3",
+              children: "Client Testimonials"
+            }
+          ),
           /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-display-md text-white mb-4", children: "Trusted by Business Leaders" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-white/50 max-w-lg mx-auto text-base", children: "What Delhi's executives say about working with Rama Properties." })
         ]
@@ -72525,19 +72752,46 @@ function Testimonials() {
           motion.div,
           {
             "data-ocid": `testimonials.item.${i + 1}`,
-            initial: { opacity: 0, y: 28 },
+            initial: { opacity: 0, y: 32 },
             whileInView: { opacity: 1, y: 0 },
-            viewport: { once: true },
-            transition: { duration: 0.55, delay: i * 0.1 },
-            whileHover: { y: -6, scale: 1.01 },
+            viewport: { once: true, margin: "-60px" },
+            transition: {
+              duration: 0.55,
+              delay: i * 0.1,
+              ease: [0.34, 1.1, 0.64, 1]
+            },
+            whileHover: { y: -8, scale: 1.015 },
             onClick: () => setActiveIndex(i),
-            className: `glass-effect-dark rounded-xl p-7 cursor-pointer transition-all duration-300 ${activeIndex === i ? "border border-accent/40 shadow-elevated" : "border border-white/5 hover:border-white/15"}`,
+            className: `glass-effect-dark rounded-xl p-7 cursor-pointer transition-all duration-350 ${activeIndex === i ? "border border-accent/40 shadow-elevated" : "border border-white/5 hover:border-white/20"}`,
             style: {
               boxShadow: activeIndex === i ? "0 0 0 1px rgba(204,0,0,0.35), 0 12px 32px rgba(0,0,0,0.4)" : void 0
             },
             children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Quote, { size: 20, className: "text-accent/60 mb-4" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-0.5 mb-4", children: [1, 2, 3, 4, 5].slice(0, t2.rating).map((n2) => /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { size: 12, className: "fill-accent text-accent" }, n2)) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                motion.div,
+                {
+                  initial: { opacity: 0, scale: 0.7 },
+                  whileInView: { opacity: 1, scale: 1 },
+                  viewport: { once: true },
+                  transition: { delay: i * 0.1 + 0.15, duration: 0.35 },
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsx(Quote, { size: 20, className: "text-accent/60 mb-4" })
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-0.5 mb-4", children: [1, 2, 3, 4, 5].slice(0, t2.rating).map((n2, si) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                motion.div,
+                {
+                  initial: { opacity: 0, scale: 0 },
+                  whileInView: { opacity: 1, scale: 1 },
+                  viewport: { once: true },
+                  transition: {
+                    delay: i * 0.08 + si * 0.06 + 0.2,
+                    duration: 0.25,
+                    type: "spring"
+                  },
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { size: 12, className: "fill-accent text-accent" })
+                },
+                n2
+              )) }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-white/75 text-sm leading-relaxed mb-6 line-clamp-4", children: [
                 '"',
                 t2.text,
@@ -72554,7 +72808,7 @@ function Testimonials() {
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center gap-2 mt-10", children: TESTIMONIALS.map((t2, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "button",
+      motion.button,
       {
         type: "button",
         "data-ocid": `testimonials.tab.${i + 1}`,
@@ -72562,7 +72816,12 @@ function Testimonials() {
           setActiveIndex(i);
           startAuto();
         },
-        className: `rounded-full transition-smooth ${activeIndex === i ? "w-6 h-2 bg-accent" : "w-2 h-2 bg-white/25 hover:bg-white/50"}`
+        animate: {
+          width: activeIndex === i ? 24 : 8,
+          backgroundColor: activeIndex === i ? "rgba(204,0,0,1)" : "rgba(255,255,255,0.25)"
+        },
+        transition: { duration: 0.3, ease: "easeInOut" },
+        className: "h-2 rounded-full hover:opacity-75"
       },
       t2.name
     )) })
@@ -72591,14 +72850,48 @@ const AUTHORITY_POINTS = [
   }
 ];
 const STATS = [
-  { value: "20+", label: "Commercial Projects" },
-  { value: "50+", label: "Happy Clients" },
-  { value: "4.4★", label: "Client Rating" },
-  { value: "10+", label: "Years Experience" }
+  { value: 20, suffix: "+", label: "Commercial Projects" },
+  { value: 50, suffix: "+", label: "Happy Clients" },
+  { value: 4.4, suffix: "★", label: "Client Rating", isDecimal: true },
+  { value: 10, suffix: "+", label: "Years Experience" }
 ];
+function AnimatedCounter({
+  target,
+  suffix: suffix2,
+  isDecimal: isDecimal2,
+  inView: inView2
+}) {
+  const [count2, setCount] = reactExports.useState(0);
+  const hasRun = reactExports.useRef(false);
+  reactExports.useEffect(() => {
+    if (!inView2 || hasRun.current) return;
+    hasRun.current = true;
+    const duration = 1400;
+    const steps = isDecimal2 ? 44 : 60;
+    const stepTime = duration / steps;
+    let current = 0;
+    const timer = setInterval(() => {
+      current++;
+      const progress2 = current / steps;
+      const eased = 1 - (1 - progress2) * (1 - progress2);
+      const val = target * eased;
+      setCount(
+        isDecimal2 ? Math.min(val, target) : Math.min(Math.round(val), target)
+      );
+      if (current >= steps) clearInterval(timer);
+    }, stepTime);
+    return () => clearInterval(timer);
+  }, [inView2, target, isDecimal2]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+    isDecimal2 ? count2.toFixed(1) : count2,
+    suffix2
+  ] });
+}
 function WhyRamaProperties() {
   const lineRef = reactExports.useRef(null);
+  const statsRef = reactExports.useRef(null);
   const inView2 = useInView(lineRef, { once: true, margin: "-100px" });
+  const statsInView = useInView(statsRef, { once: true, margin: "-80px" });
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     "section",
     {
@@ -72615,7 +72908,17 @@ function WhyRamaProperties() {
             transition: { duration: 0.7 },
             className: "mb-20",
             children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-accent text-xs tracking-widest uppercase font-semibold mb-4", children: "Why Choose Us" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                motion.p,
+                {
+                  initial: { opacity: 0, letterSpacing: "0.2em" },
+                  whileInView: { opacity: 1, letterSpacing: "0.3em" },
+                  viewport: { once: true },
+                  transition: { duration: 0.6 },
+                  className: "text-accent text-xs tracking-widest uppercase font-semibold mb-4",
+                  children: "Why Choose Us"
+                }
+              ),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-display-md text-foreground max-w-lg leading-tight", children: [
                   "Delhi's Trusted",
@@ -72649,13 +72952,26 @@ function WhyRamaProperties() {
             motion.div,
             {
               "data-ocid": `about.authority.${i + 1}`,
-              initial: { opacity: 0, x: i % 2 === 0 ? -20 : 20 },
+              initial: { opacity: 0, x: i % 2 === 0 ? -24 : 24 },
               whileInView: { opacity: 1, x: 0 },
-              viewport: { once: true },
-              transition: { duration: 0.6, delay: i * 0.1 },
-              className: "group flex gap-5 p-7 rounded-xl border border-border bg-card shadow-subtle hover:shadow-elevated hover:border-primary/25 transition-smooth",
+              viewport: { once: true, margin: "-60px" },
+              transition: {
+                duration: 0.6,
+                delay: i * 0.1,
+                ease: [0.34, 1.1, 0.64, 1]
+              },
+              whileHover: { y: -4 },
+              className: "group flex gap-5 p-7 rounded-xl border border-border bg-card shadow-subtle hover:shadow-elevated hover:border-primary/25 transition-all duration-300",
               children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-shrink-0 w-12 h-12 rounded-lg bg-primary/[0.07] flex items-center justify-center group-hover:bg-primary/[0.13] transition-smooth", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { size: 22, className: "text-primary" }) }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  motion.div,
+                  {
+                    className: "flex-shrink-0 w-12 h-12 rounded-lg bg-primary/[0.07] flex items-center justify-center group-hover:bg-primary/[0.13] transition-smooth",
+                    whileHover: { rotate: [0, -8, 8, 0] },
+                    transition: { duration: 0.4 },
+                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { size: 22, className: "text-primary" })
+                  }
+                ),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-3 mb-2", children: /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-bold text-base text-foreground", children: point2.title }) }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -72675,32 +72991,34 @@ function WhyRamaProperties() {
             point2.title
           );
         }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref: statsRef, className: "grid grid-cols-2 lg:grid-cols-4 gap-6", children: STATS.map((stat, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
           motion.div,
           {
-            initial: { opacity: 0, y: 24 },
-            whileInView: { opacity: 1, y: 0 },
-            viewport: { once: true },
-            transition: { duration: 0.7 },
-            className: "grid grid-cols-2 lg:grid-cols-4 gap-6",
-            children: STATS.map((stat, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              motion.div,
-              {
-                "data-ocid": `about.stat.${i + 1}`,
-                initial: { opacity: 0, scale: 0.9 },
-                whileInView: { opacity: 1, scale: 1 },
-                viewport: { once: true },
-                transition: { duration: 0.5, delay: i * 0.1 },
-                className: "text-center py-8 px-4 rounded-xl bg-[#0d1f3c] border border-white/5",
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-display-sm text-white mb-1.5 font-display font-bold", children: stat.value }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-white/50 text-xs tracking-wide", children: stat.label })
-                ]
-              },
-              stat.label
-            ))
-          }
-        )
+            "data-ocid": `about.stat.${i + 1}`,
+            initial: { opacity: 0, scale: 0.85, y: 16 },
+            animate: statsInView ? { opacity: 1, scale: 1, y: 0 } : {},
+            transition: {
+              duration: 0.55,
+              delay: i * 0.1,
+              ease: [0.34, 1.56, 0.64, 1]
+            },
+            whileHover: { scale: 1.05, y: -3 },
+            className: "text-center py-8 px-4 rounded-xl bg-[#0d1f3c] border border-white/5 hover:border-accent/25 transition-all duration-300 cursor-default",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-display-sm text-white mb-1.5 font-display font-bold", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                AnimatedCounter,
+                {
+                  target: stat.value,
+                  suffix: stat.suffix,
+                  isDecimal: stat.isDecimal,
+                  inView: statsInView
+                }
+              ) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-white/50 text-xs tracking-wide", children: stat.label })
+            ]
+          },
+          stat.label
+        )) })
       ] })
     }
   );

@@ -1,6 +1,6 @@
 import { BarChart2, Briefcase, Network, TrendingUp } from "lucide-react";
 import { motion, useInView } from "motion/react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const AUTHORITY_POINTS = [
   {
@@ -30,15 +30,59 @@ const AUTHORITY_POINTS = [
 ];
 
 const STATS = [
-  { value: "20+", label: "Commercial Projects" },
-  { value: "50+", label: "Happy Clients" },
-  { value: "4.4★", label: "Client Rating" },
-  { value: "10+", label: "Years Experience" },
+  { value: 20, suffix: "+", label: "Commercial Projects" },
+  { value: 50, suffix: "+", label: "Happy Clients" },
+  { value: 4.4, suffix: "\u2605", label: "Client Rating", isDecimal: true },
+  { value: 10, suffix: "+", label: "Years Experience" },
 ];
+
+function AnimatedCounter({
+  target,
+  suffix,
+  isDecimal,
+  inView,
+}: {
+  target: number;
+  suffix: string;
+  isDecimal?: boolean;
+  inView: boolean;
+}) {
+  const [count, setCount] = useState(0);
+  const hasRun = useRef(false);
+
+  useEffect(() => {
+    if (!inView || hasRun.current) return;
+    hasRun.current = true;
+    const duration = 1400;
+    const steps = isDecimal ? 44 : 60;
+    const stepTime = duration / steps;
+    let current = 0;
+    const timer = setInterval(() => {
+      current++;
+      const progress = current / steps;
+      const eased = 1 - (1 - progress) * (1 - progress);
+      const val = target * eased;
+      setCount(
+        isDecimal ? Math.min(val, target) : Math.min(Math.round(val), target),
+      );
+      if (current >= steps) clearInterval(timer);
+    }, stepTime);
+    return () => clearInterval(timer);
+  }, [inView, target, isDecimal]);
+
+  return (
+    <span>
+      {isDecimal ? count.toFixed(1) : count}
+      {suffix}
+    </span>
+  );
+}
 
 export function WhyRamaProperties() {
   const lineRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
   const inView = useInView(lineRef, { once: true, margin: "-100px" });
+  const statsInView = useInView(statsRef, { once: true, margin: "-80px" });
 
   return (
     <section
@@ -55,9 +99,15 @@ export function WhyRamaProperties() {
           transition={{ duration: 0.7 }}
           className="mb-20"
         >
-          <p className="text-accent text-xs tracking-widest uppercase font-semibold mb-4">
+          <motion.p
+            initial={{ opacity: 0, letterSpacing: "0.2em" }}
+            whileInView={{ opacity: 1, letterSpacing: "0.3em" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-accent text-xs tracking-widest uppercase font-semibold mb-4"
+          >
             Why Choose Us
-          </p>
+          </motion.p>
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
             <h2 className="text-display-md text-foreground max-w-lg leading-tight">
               Delhi's Trusted
@@ -93,15 +143,24 @@ export function WhyRamaProperties() {
               <motion.div
                 key={point.title}
                 data-ocid={`about.authority.${i + 1}`}
-                initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
+                initial={{ opacity: 0, x: i % 2 === 0 ? -24 : 24 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="group flex gap-5 p-7 rounded-xl border border-border bg-card shadow-subtle hover:shadow-elevated hover:border-primary/25 transition-smooth"
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{
+                  duration: 0.6,
+                  delay: i * 0.1,
+                  ease: [0.34, 1.1, 0.64, 1],
+                }}
+                whileHover={{ y: -4 }}
+                className="group flex gap-5 p-7 rounded-xl border border-border bg-card shadow-subtle hover:shadow-elevated hover:border-primary/25 transition-all duration-300"
               >
-                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/[0.07] flex items-center justify-center group-hover:bg-primary/[0.13] transition-smooth">
+                <motion.div
+                  className="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/[0.07] flex items-center justify-center group-hover:bg-primary/[0.13] transition-smooth"
+                  whileHover={{ rotate: [0, -8, 8, 0] }}
+                  transition={{ duration: 0.4 }}
+                >
                   <Icon size={22} className="text-primary" />
-                </div>
+                </motion.div>
                 <div className="min-w-0">
                   <div className="flex items-center gap-3 mb-2">
                     <h3 className="font-display font-bold text-base text-foreground">
@@ -124,33 +183,36 @@ export function WhyRamaProperties() {
           })}
         </div>
 
-        {/* Stats strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-6"
-        >
+        {/* Stats strip with animated counters */}
+        <div ref={statsRef} className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {STATS.map((stat, i) => (
             <motion.div
               key={stat.label}
               data-ocid={`about.stat.${i + 1}`}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="text-center py-8 px-4 rounded-xl bg-[#0d1f3c] border border-white/5"
+              initial={{ opacity: 0, scale: 0.85, y: 16 }}
+              animate={statsInView ? { opacity: 1, scale: 1, y: 0 } : {}}
+              transition={{
+                duration: 0.55,
+                delay: i * 0.1,
+                ease: [0.34, 1.56, 0.64, 1],
+              }}
+              whileHover={{ scale: 1.05, y: -3 }}
+              className="text-center py-8 px-4 rounded-xl bg-[#0d1f3c] border border-white/5 hover:border-accent/25 transition-all duration-300 cursor-default"
             >
               <p className="text-display-sm text-white mb-1.5 font-display font-bold">
-                {stat.value}
+                <AnimatedCounter
+                  target={stat.value}
+                  suffix={stat.suffix}
+                  isDecimal={stat.isDecimal}
+                  inView={statsInView}
+                />
               </p>
               <p className="text-white/50 text-xs tracking-wide">
                 {stat.label}
               </p>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -61,14 +61,22 @@ export function Hero({ onConsultationOpen }: HeroProps) {
         style={{ y: contentY, opacity }}
         className="relative z-10 text-center px-6 max-w-5xl mx-auto"
       >
-        {/* Eyebrow */}
+        {/* Eyebrow badge with bob float */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-white/15 glass-effect-dark text-white/70 text-sm tracking-widest uppercase"
+          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+          className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-white/15 glass-effect-dark text-white/70 text-sm tracking-widest uppercase animate-bob"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+          <motion.span
+            animate={{ scale: [1, 1.4, 1], opacity: [0.8, 1, 0.8] }}
+            transition={{
+              duration: 2.5,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+            className="w-1.5 h-1.5 rounded-full bg-accent"
+          />
           Bhikaji Cama Place, New Delhi
         </motion.div>
 
@@ -112,26 +120,30 @@ export function Hero({ onConsultationOpen }: HeroProps) {
           transition={{ duration: 0.7, delay: 0.7 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14"
         >
-          <Button
-            type="button"
-            data-ocid="hero.consultation_button"
-            onClick={onConsultationOpen}
-            className="bg-accent hover:bg-accent/90 text-white h-12 px-8 text-sm font-semibold tracking-wide rounded shadow-elevated transition-smooth group"
-          >
-            Schedule Consultation
-          </Button>
-          <Button
-            type="button"
-            data-ocid="hero.explore_button"
-            variant="outline"
-            onClick={scrollToProperties}
-            className="border-white/30 text-white hover:bg-white/10 hover:border-white/60 h-12 px-8 text-sm font-semibold tracking-wide rounded bg-transparent transition-smooth"
-          >
-            Explore Properties
-          </Button>
+          <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+            <Button
+              type="button"
+              data-ocid="hero.consultation_button"
+              onClick={onConsultationOpen}
+              className="bg-accent hover:bg-accent/90 text-white h-12 px-8 text-sm font-semibold tracking-wide rounded shadow-elevated transition-smooth group"
+            >
+              Schedule Consultation
+            </Button>
+          </motion.div>
+          <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+            <Button
+              type="button"
+              data-ocid="hero.explore_button"
+              variant="outline"
+              onClick={scrollToProperties}
+              className="border-white/30 text-white hover:bg-white/10 hover:border-white/60 h-12 px-8 text-sm font-semibold tracking-wide rounded bg-transparent transition-smooth"
+            >
+              Explore Properties
+            </Button>
+          </motion.div>
         </motion.div>
 
-        {/* Trust strip */}
+        {/* Trust strip with staggered entrance */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -143,10 +155,16 @@ export function Hero({ onConsultationOpen }: HeroProps) {
               key={item.label}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.9 + i * 0.12 }}
-              className="flex items-center gap-2.5 text-white/60"
+              transition={{ duration: 0.5, delay: 0.9 + i * 0.14 }}
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center gap-2.5 text-white/60 cursor-default"
             >
-              <item.icon size={16} className="text-accent/80" />
+              <motion.div
+                whileHover={{ rotate: [0, -8, 8, 0] }}
+                transition={{ duration: 0.4 }}
+              >
+                <item.icon size={16} className="text-accent/80" />
+              </motion.div>
               <span className="text-sm tracking-wide">{item.label}</span>
               {i < TRUST_ITEMS.length - 1 && (
                 <span className="hidden sm:block w-px h-4 bg-white/20 ml-4" />
@@ -164,6 +182,7 @@ export function Hero({ onConsultationOpen }: HeroProps) {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4, duration: 0.6 }}
         onClick={scrollToProperties}
+        whileHover={{ scale: 1.1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-white/40 hover:text-white/70 transition-colors cursor-pointer"
         aria-label="Scroll down"
       >

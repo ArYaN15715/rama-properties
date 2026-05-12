@@ -51,9 +51,15 @@ export function ConsultationProcess() {
           transition={{ duration: 0.7 }}
           className="text-center mb-20"
         >
-          <p className="text-accent text-xs tracking-widest uppercase font-semibold mb-3">
+          <motion.p
+            initial={{ opacity: 0, letterSpacing: "0.2em" }}
+            whileInView={{ opacity: 1, letterSpacing: "0.3em" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-accent text-xs tracking-widest uppercase font-semibold mb-3"
+          >
             How We Work
-          </p>
+          </motion.p>
           <h2 className="text-display-md text-foreground mb-4">
             Smart Consultation Process
           </h2>
@@ -105,15 +111,25 @@ export function ConsultationProcess() {
               <motion.div
                 key={step.number}
                 data-ocid={`services.step.${i + 1}`}
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -24 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.55, delay: i * 0.1 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{
+                  duration: 0.55,
+                  delay: i * 0.12,
+                  ease: [0.34, 1.1, 0.64, 1],
+                }}
                 className="flex gap-5 relative pb-10 last:pb-0"
               >
                 {/* Vertical line */}
                 {i < STEPS.length - 1 && (
-                  <div className="absolute left-5 top-12 bottom-0 w-px bg-gradient-to-b from-accent/40 to-border" />
+                  <motion.div
+                    initial={{ scaleY: 0 }}
+                    whileInView={{ scaleY: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: i * 0.12 + 0.3 }}
+                    className="absolute left-5 top-12 bottom-0 w-px bg-gradient-to-b from-accent/40 to-border origin-top"
+                  />
                 )}
                 <div className="flex-shrink-0 w-11 h-11 rounded-full border-2 border-primary/30 bg-card shadow-subtle flex items-center justify-center z-10">
                   <span className="font-display font-bold text-xs text-primary">
@@ -145,21 +161,34 @@ function StepCard({ step, index }: { step: (typeof STEPS)[0]; index: number }) {
   return (
     <motion.div
       data-ocid={`services.step.${index + 1}`}
-      initial={{ opacity: 0, y: 28 }}
+      initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.55, delay: index * 0.12 }}
-      whileHover={{ y: -4 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{
+        duration: 0.55,
+        delay: index * 0.14,
+        ease: [0.34, 1.1, 0.64, 1],
+      }}
+      whileHover={{ y: -6 }}
       className="group flex flex-col items-center text-center cursor-default"
     >
       {/* Number circle */}
-      <div className="relative z-10 w-20 h-20 rounded-full border-2 border-border bg-card shadow-subtle flex items-center justify-center mb-6 group-hover:border-accent/40 group-hover:shadow-elevated transition-smooth">
-        <span className="font-display font-bold text-2xl text-primary group-hover:text-accent transition-smooth">
+      <motion.div
+        className="relative z-10 w-20 h-20 rounded-full border-2 border-border bg-card shadow-subtle flex items-center justify-center mb-6 group-hover:border-accent/40 group-hover:shadow-elevated transition-all duration-300"
+        whileHover={{ scale: 1.08 }}
+        transition={{ duration: 0.22 }}
+      >
+        <span className="font-display font-bold text-2xl text-primary group-hover:text-accent transition-colors duration-300">
           {step.number}
         </span>
-      </div>
+      </motion.div>
       <div className="flex items-center gap-2 mb-3">
-        <Icon size={16} className="text-accent flex-shrink-0" />
+        <motion.div
+          whileHover={{ rotate: [0, -10, 10, 0] }}
+          transition={{ duration: 0.35 }}
+        >
+          <Icon size={16} className="text-accent flex-shrink-0" />
+        </motion.div>
         <h3 className="font-display font-semibold text-base text-foreground">
           {step.title}
         </h3>

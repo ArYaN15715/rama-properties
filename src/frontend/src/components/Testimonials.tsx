@@ -60,9 +60,15 @@ export function Testimonials() {
           transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <p className="text-accent text-xs tracking-widest uppercase font-semibold mb-3">
+          <motion.p
+            initial={{ opacity: 0, letterSpacing: "0.2em" }}
+            whileInView={{ opacity: 1, letterSpacing: "0.3em" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-accent text-xs tracking-widest uppercase font-semibold mb-3"
+          >
             Client Testimonials
-          </p>
+          </motion.p>
           <h2 className="text-display-md text-white mb-4">
             Trusted by Business Leaders
           </h2>
@@ -81,16 +87,20 @@ export function Testimonials() {
             <motion.div
               key={t.name}
               data-ocid={`testimonials.item.${i + 1}`}
-              initial={{ opacity: 0, y: 28 }}
+              initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.55, delay: i * 0.1 }}
-              whileHover={{ y: -6, scale: 1.01 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{
+                duration: 0.55,
+                delay: i * 0.1,
+                ease: [0.34, 1.1, 0.64, 1],
+              }}
+              whileHover={{ y: -8, scale: 1.015 }}
               onClick={() => setActiveIndex(i)}
-              className={`glass-effect-dark rounded-xl p-7 cursor-pointer transition-all duration-300 ${
+              className={`glass-effect-dark rounded-xl p-7 cursor-pointer transition-all duration-350 ${
                 activeIndex === i
                   ? "border border-accent/40 shadow-elevated"
-                  : "border border-white/5 hover:border-white/15"
+                  : "border border-white/5 hover:border-white/20"
               }`}
               style={{
                 boxShadow:
@@ -99,10 +109,29 @@ export function Testimonials() {
                     : undefined,
               }}
             >
-              <Quote size={20} className="text-accent/60 mb-4" />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.7 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 + 0.15, duration: 0.35 }}
+              >
+                <Quote size={20} className="text-accent/60 mb-4" />
+              </motion.div>
               <div className="flex gap-0.5 mb-4">
-                {[1, 2, 3, 4, 5].slice(0, t.rating).map((n) => (
-                  <Star key={n} size={12} className="fill-accent text-accent" />
+                {[1, 2, 3, 4, 5].slice(0, t.rating).map((n, si) => (
+                  <motion.div
+                    key={n}
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      delay: i * 0.08 + si * 0.06 + 0.2,
+                      duration: 0.25,
+                      type: "spring",
+                    }}
+                  >
+                    <Star size={12} className="fill-accent text-accent" />
+                  </motion.div>
                 ))}
               </div>
               <p className="text-white/75 text-sm leading-relaxed mb-6 line-clamp-4">
@@ -116,10 +145,10 @@ export function Testimonials() {
           ))}
         </div>
 
-        {/* Indicator dots */}
+        {/* Indicator dots with smooth transitions */}
         <div className="flex items-center justify-center gap-2 mt-10">
           {TESTIMONIALS.map((t, i) => (
-            <button
+            <motion.button
               key={t.name}
               type="button"
               data-ocid={`testimonials.tab.${i + 1}`}
@@ -127,11 +156,15 @@ export function Testimonials() {
                 setActiveIndex(i);
                 startAuto();
               }}
-              className={`rounded-full transition-smooth ${
-                activeIndex === i
-                  ? "w-6 h-2 bg-accent"
-                  : "w-2 h-2 bg-white/25 hover:bg-white/50"
-              }`}
+              animate={{
+                width: activeIndex === i ? 24 : 8,
+                backgroundColor:
+                  activeIndex === i
+                    ? "rgba(204,0,0,1)"
+                    : "rgba(255,255,255,0.25)",
+              }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="h-2 rounded-full hover:opacity-75"
             />
           ))}
         </div>

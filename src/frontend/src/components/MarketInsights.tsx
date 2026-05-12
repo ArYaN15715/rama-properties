@@ -263,19 +263,33 @@ function InsightCard({
   return (
     <motion.div
       data-ocid={`insights.card.${index + 1}`}
-      initial={{ opacity: 0, y: 28 }}
+      initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      whileHover={{ y: -4 }}
-      className="glass-effect-dark rounded-xl p-7 transition-smooth hover:border-white/15 border border-white/5"
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{
+        duration: 0.6,
+        delay: index * 0.1,
+        ease: [0.34, 1.1, 0.64, 1],
+      }}
+      whileHover={{ y: -5 }}
+      className="glass-effect-dark rounded-xl p-7 transition-all duration-300 border border-white/5 hover:border-accent/20"
+      style={{
+        boxShadow: undefined,
+      }}
+      whileFocus={{ boxShadow: "0 0 0 2px rgba(204,0,0,0.35)" }}
     >
-      <div className="mb-5">
+      <motion.div
+        className="mb-5"
+        initial={{ opacity: 0, x: -8 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: index * 0.1 + 0.15, duration: 0.4 }}
+      >
         <h3 className="font-display font-semibold text-base text-white mb-1">
           {title}
         </h3>
         <p className="text-white/40 text-xs">{subtitle}</p>
-      </div>
+      </motion.div>
       {children}
     </motion.div>
   );

@@ -95,14 +95,17 @@ export function FloatingActions({ onConsultationOpen }: FloatingActionsProps) {
         data-ocid="floating.toggle_button"
         onClick={() => setExpanded(!expanded)}
         className="w-13 h-13 rounded-full bg-[#0d1f3c] hover:bg-[#152d54] text-white flex items-center justify-center shadow-elevated border border-white/10 transition-smooth"
-        whileHover={{ scale: 1.08 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={{
+          scale: 1.1,
+          boxShadow: "0 0 0 4px rgba(204,0,0,0.18), 0 8px 24px rgba(0,0,0,0.3)",
+        }}
+        whileTap={{ scale: 0.93 }}
         aria-label="Contact options"
         style={{ width: 52, height: 52 }}
       >
         <motion.div
           animate={{ rotate: expanded ? 45 : 0 }}
-          transition={{ duration: 0.25 }}
+          transition={{ duration: 0.28, ease: [0.34, 1.56, 0.64, 1] }}
         >
           {expanded ? <X size={20} /> : <Plus size={20} />}
         </motion.div>

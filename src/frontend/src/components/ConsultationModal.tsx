@@ -151,7 +151,7 @@ export function ConsultationModal({ open, onClose }: ConsultationModalProps) {
                   data-ocid="consultation.name_input"
                   placeholder="Rajesh Kumar"
                   {...register("name", { required: "Name is required" })}
-                  className={errors.name ? "border-accent" : ""}
+                  className={`input-focus-glow transition-all duration-200 ${errors.name ? "border-accent" : ""}`}
                 />
                 {errors.name && (
                   <p
@@ -179,7 +179,7 @@ export function ConsultationModal({ open, onClose }: ConsultationModalProps) {
                       message: "Enter a valid phone number",
                     },
                   })}
-                  className={errors.phone ? "border-accent" : ""}
+                  className={`input-focus-glow transition-all duration-200 ${errors.phone ? "border-accent" : ""}`}
                 />
                 {errors.phone && (
                   <p
@@ -208,7 +208,7 @@ export function ConsultationModal({ open, onClose }: ConsultationModalProps) {
                     message: "Enter a valid email",
                   },
                 })}
-                className={errors.email ? "border-accent" : ""}
+                className={`input-focus-glow transition-all duration-200 ${errors.email ? "border-accent" : ""}`}
               />
               {errors.email && (
                 <p

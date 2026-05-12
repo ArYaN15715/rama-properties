@@ -87,13 +87,19 @@ export function FeaturedProperties() {
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <p className="text-accent text-xs tracking-widest uppercase font-semibold mb-3">
+          <motion.p
+            initial={{ opacity: 0, letterSpacing: "0.2em" }}
+            whileInView={{ opacity: 1, letterSpacing: "0.3em" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-accent text-xs tracking-widest uppercase font-semibold mb-3"
+          >
             Available Now
-          </p>
+          </motion.p>
           <h2 className="text-display-md text-foreground mb-4">
             Featured Office Spaces
           </h2>
@@ -121,15 +127,17 @@ export function FeaturedProperties() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-center mt-14"
         >
-          <Button
-            type="button"
-            data-ocid="featured.view_all_button"
-            variant="outline"
-            onClick={() => setConsultationOpen(true)}
-            className="border-primary/30 text-primary hover:bg-primary/5 hover:border-primary/60 px-10 h-12 font-semibold tracking-wide transition-smooth"
-          >
-            Request Full Portfolio
-          </Button>
+          <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+            <Button
+              type="button"
+              data-ocid="featured.view_all_button"
+              variant="outline"
+              onClick={() => setConsultationOpen(true)}
+              className="border-primary/30 text-primary hover:bg-primary/5 hover:border-primary/60 px-10 h-12 font-semibold tracking-wide transition-smooth"
+            >
+              Request Full Portfolio
+            </Button>
+          </motion.div>
         </motion.div>
       </div>
 
@@ -153,11 +161,16 @@ function PropertyCard({
   return (
     <motion.div
       data-ocid={`featured.item.${index + 1}`}
-      initial={{ opacity: 0, y: 28 }}
+      initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.55, delay: index * 0.08 }}
-      className="group relative rounded-xl overflow-hidden shadow-subtle hover:shadow-elevated transition-smooth border border-border bg-card cursor-pointer"
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{
+        duration: 0.55,
+        delay: index * 0.08,
+        ease: [0.34, 1.1, 0.64, 1],
+      }}
+      whileHover={{ y: -6 }}
+      className="group relative rounded-xl overflow-hidden shadow-subtle hover:shadow-elevated transition-all duration-300 border border-border hover:border-primary/20 bg-card cursor-pointer"
       onClick={onEnquire}
     >
       {/* Image */}
@@ -170,9 +183,9 @@ function PropertyCard({
         {/* Hover overlay */}
         <div className="absolute inset-0 bg-[#0d1f3c]/0 group-hover:bg-[#0d1f3c]/75 transition-all duration-300 flex items-center justify-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
-            whileHover={{ opacity: 1, scale: 1 }}
-            className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            initial={{ opacity: 0, scale: 0.88, y: 8 }}
+            whileHover={{ opacity: 1, scale: 1, y: 0 }}
+            className="opacity-0 group-hover:opacity-100 transition-all duration-300"
           >
             <Button
               type="button"
@@ -187,12 +200,18 @@ function PropertyCard({
             </Button>
           </motion.div>
         </div>
-        {/* Type badge */}
-        <div className="absolute top-4 left-4">
+        {/* Type badge with subtle pulse on mount */}
+        <motion.div
+          className="absolute top-4 left-4"
+          initial={{ opacity: 0, scale: 0.85 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: index * 0.08 + 0.3, duration: 0.3 }}
+        >
           <Badge className="bg-[#0d1f3c]/80 backdrop-blur-sm text-white border-0 text-[10px] font-semibold tracking-wide">
             {property.type}
           </Badge>
-        </div>
+        </motion.div>
       </div>
 
       {/* Details */}

@@ -41,20 +41,24 @@ export function Footer() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <img
+              <motion.img
                 src="/assets/logo-019e16aa-2718-718b-a354-8b642ee0ec24.png"
                 alt="Rama Properties"
                 className="h-11 w-auto mb-5"
+                whileHover={{ scale: 1.04 }}
+                transition={{ duration: 0.2 }}
               />
               <p className="text-white/45 text-sm leading-relaxed mb-6 max-w-xs">
                 Premium office space and commercial property advisory in Delhi
                 NCR. Bhikaji Cama Place's most trusted consultants.
               </p>
               <div className="flex flex-col gap-3">
-                <a
+                <motion.a
                   href="https://maps.google.com/?q=Bhikaji+Cama+Place+New+Delhi"
                   target="_blank"
                   rel="noopener noreferrer"
+                  whileHover={{ x: 3 }}
+                  transition={{ duration: 0.18 }}
                   className="flex items-start gap-2.5 text-white/40 hover:text-white/70 transition-colors text-xs"
                 >
                   <MapPin
@@ -62,18 +66,22 @@ export function Footer() {
                     className="flex-shrink-0 mt-0.5 text-accent/70"
                   />
                   Bhikaji Cama Place, New Delhi — 110066
-                </a>
-                <a
+                </motion.a>
+                <motion.a
                   href="tel:+919999999999"
+                  whileHover={{ x: 3 }}
+                  transition={{ duration: 0.18 }}
                   className="flex items-center gap-2.5 text-white/40 hover:text-white/70 transition-colors text-xs"
                 >
                   <Phone size={13} className="flex-shrink-0 text-accent/70" />
                   +91 99999 99999
-                </a>
-                <a
+                </motion.a>
+                <motion.a
                   href="https://wa.me/919999999999"
                   target="_blank"
                   rel="noopener noreferrer"
+                  whileHover={{ x: 3 }}
+                  transition={{ duration: 0.18 }}
                   className="flex items-center gap-2.5 text-white/40 hover:text-accent/80 transition-colors text-xs"
                 >
                   <MessageCircle
@@ -81,7 +89,7 @@ export function Footer() {
                     className="flex-shrink-0 text-accent/70"
                   />
                   WhatsApp Us
-                </a>
+                </motion.a>
               </div>
             </motion.div>
           </div>
@@ -103,9 +111,10 @@ export function Footer() {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-white/40 hover:text-white/75 transition-colors text-sm"
+                      className="text-white/40 hover:text-white/75 transition-colors duration-200 text-sm group relative inline-block"
                     >
                       {link.label}
+                      <span className="absolute -bottom-px left-0 h-px w-0 bg-white/40 group-hover:w-full transition-all duration-300" />
                     </a>
                   </li>
                 ))}

@@ -32,6 +32,25 @@ export function CTASection({ onConsultationOpen }: CTASectionProps) {
         }}
       />
 
+      {/* Secondary drifting orb */}
+      <motion.div
+        animate={{
+          x: [-20, 20, -20],
+          y: [-10, 10, -10],
+          opacity: [0.06, 0.12, 0.06],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+        }}
+        className="absolute top-1/3 right-1/4 w-[300px] h-[300px] rounded-full pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(26,58,107,0.3) 0%, transparent 70%)",
+        }}
+      />
+
       {/* Subtle grid overlay */}
       <div
         className="absolute inset-0 pointer-events-none opacity-5"
@@ -49,10 +68,16 @@ export function CTASection({ onConsultationOpen }: CTASectionProps) {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <p className="text-accent text-xs tracking-widest uppercase font-semibold mb-5">
+          <motion.p
+            initial={{ opacity: 0, letterSpacing: "0.2em" }}
+            whileInView={{ opacity: 1, letterSpacing: "0.3em" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-accent text-xs tracking-widest uppercase font-semibold mb-5"
+          >
             Get Started Today
-          </p>
-          <h2 className="text-display-md text-white mb-5 leading-tight">
+          </motion.p>
+          <h2 className="text-display-md text-white mb-5 leading-tight text-shimmer">
             Looking for the Right
             <br />
             Commercial Property?
@@ -64,23 +89,27 @@ export function CTASection({ onConsultationOpen }: CTASectionProps) {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button
-              type="button"
-              data-ocid="cta.consultation_button"
-              onClick={onConsultationOpen}
-              size="lg"
-              className="bg-accent hover:bg-accent/85 text-white font-semibold tracking-wide px-10 h-13 shadow-elevated transition-smooth text-sm"
-            >
-              Book Consultation
-            </Button>
-            <a
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
+              <Button
+                type="button"
+                data-ocid="cta.consultation_button"
+                onClick={onConsultationOpen}
+                size="lg"
+                className="bg-accent hover:bg-accent/85 text-white font-semibold tracking-wide px-10 h-13 shadow-elevated transition-smooth text-sm"
+              >
+                Book Consultation
+              </Button>
+            </motion.div>
+            <motion.a
               href="tel:+919999999999"
               data-ocid="cta.call_button"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
               className="inline-flex items-center gap-2.5 border border-white/25 text-white hover:bg-white/8 hover:border-white/50 h-13 px-8 text-sm font-semibold tracking-wide rounded-md transition-smooth"
             >
               <Phone size={15} />
               Call Now: +91 99999 99999
-            </a>
+            </motion.a>
           </div>
 
           {/* Trust strip */}
@@ -95,10 +124,17 @@ export function CTASection({ onConsultationOpen }: CTASectionProps) {
               "🏢 Commercial Property Experts",
               "📍 Bhikaji Cama Specialists",
               "💼 Investment Advisory",
-            ].map((item) => (
-              <span key={item} className="text-white/40 text-xs tracking-wide">
+            ].map((item, i) => (
+              <motion.span
+                key={item}
+                initial={{ opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 + i * 0.12, duration: 0.4 }}
+                className="text-white/40 text-xs tracking-wide hover:text-white/60 transition-colors duration-200"
+              >
                 {item}
-              </span>
+              </motion.span>
             ))}
           </motion.div>
         </motion.div>
